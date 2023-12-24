@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Rock-Paper-Scissors</title>
+    </head>
+    <body>
+        <script>
+            let getComputerChoice = () => {
+                const choices = ["rock","paper","scissors"];
+                let index = Math.floor(Math.random () *choices.length);
+                return choices[index];
+            }
+
+            let playerCount = 0;
+            let compCount = 0;
+            let round = 0;
+
+            function playRound(){
+                const playerChoice = prompt("Enter a choice(rock,paper,scissors)").toLowerCase();
+                const computerChoice = getComputerChoice();
+                if (computerChoice == playerChoice) {
+                    return ("it's a draw!!");
+                } else if ((computerChoice=="paper" && playerChoice=="rock")|| (computerChoice == "rock" && playerChoice == "scissors")|| (computerChoice == "scissors" && playerChoice == "paper")){
+                    compCount++;  
+                    return (`computer chose ${computerChoice}, computer won!!`);
+                } else {
+                    playerCount++;   
+                    return (`computer chose ${computerChoice}, you won `);
+                }
+            }
+
+            function game(){
+                console.log(playRound());
+                console.log(playRound());
+                console.log(playRound());
+                console.log(playRound());
+                console.log(playRound());
+
+            }
+
+            game();
+            console.log(`playerCount: ${playerCount}, compcount: ${compCount}`);
+        </script>
+    </body>
+</html>

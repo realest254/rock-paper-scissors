@@ -1,1 +1,2 @@
 # rock-paper-scissors
+A simple rock-paper-scissors game.At the end of this project i have learned how to write and use pseudocode to my advantage to make tasks easier and also enhanced my problem solving skills.
