@@ -5,7 +5,14 @@
         <title>Rock-Paper-Scissors</title>
     </head>
     <body>
+        <button id="btn" value="rock">Rock</button>
+        <button id="btn" value="paper">Paper</button>
+        <button id="btn" value="scissors">Scissors</button>
+        <div class="results"></div>
         <script>
+            const btns = document.querySelectorAll('button');
+            const results = document.querySelector('div');
+
             let getComputerChoice = () => {
                 const choices = ["rock","paper","scissors"];
                 let index = Math.floor(Math.random () *choices.length);
@@ -14,33 +21,37 @@
 
             let playerCount = 0;
             let compCount = 0;
-            let round = 0;
-
-            function playRound(){
-                const playerChoice = prompt("Enter a choice(rock,paper,scissors)").toLowerCase();
-                const computerChoice = getComputerChoice();
-                if (computerChoice == playerChoice) {
-                    return ("it's a draw!!");
-                } else if ((computerChoice=="paper" && playerChoice=="rock")|| (computerChoice == "rock" && playerChoice == "scissors")|| (computerChoice == "scissors" && playerChoice == "paper")){
-                    compCount++;  
-                    return (`computer chose ${computerChoice}, computer won!!`);
-                } else {
-                    playerCount++;   
-                    return (`computer chose ${computerChoice}, you won `);
-                }
-            }
-
-            function game(){
-                console.log(playRound());
-                console.log(playRound());
-                console.log(playRound());
-                console.log(playRound());
-                console.log(playRound());
-
-            }
-
-            game();
-            console.log(`playerCount: ${playerCount}, compcount: ${compCount}`);
+            
+            btns.forEach(function(btn){
+                btn.addEventListener('click',() => {
+                    if (compCount < 5 && playerCount < 5){
+                        const playerChoice = btn.value;
+                        const computerChoice = getComputerChoice();
+                        if (computerChoice == playerChoice) {
+                            results.textContent = "It's a draw";
+                        } else if ((computerChoice=="paper" && playerChoice=="rock")|| (computerChoice == "rock" && playerChoice == "scissors")|| (computerChoice == "scissors" && playerChoice == "paper")){
+                            compCount++;  
+                            results.textContent =`computer chose ${computerChoice}, computer won!!`;
+                            const para = document.createElement('p');
+                            para.textContent = `player: ${playerCount}  computer:${compCount}`;
+                            results.appendChild(para);
+                        } else {
+                            playerCount++;   
+                            results.textContent =`computer chose ${computerChoice}, you won`;
+                            const para = document.createElement('p');
+                            para.textContent = ` player: ${playerCount}  computer:${compCount}`;
+                            results.appendChild(para);
+                        }
+                        if (compCount === 5) {
+                            results.textContent = `Computer won!! Computer scored ${compCount} you scored ${playerCount}`;
+                        }else if (playerCount === 5) {
+                            results.textContent = `you won !! you scored ${playerCount} computer scored ${compCount}`;
+                        }
+                    }
+                });
+            });
+            
         </script>
+        
     </body>
 </html>
